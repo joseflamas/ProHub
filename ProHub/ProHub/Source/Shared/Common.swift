@@ -34,5 +34,4 @@ var REQUESTMANAGER  :   RequestManager!
 
 /// TO-DO: Security Manager
 // - comment:   Centralized place to handle all sensitive information
-// User Location
 
