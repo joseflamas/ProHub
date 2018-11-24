@@ -134,34 +134,35 @@ extension ViewsCoordinator {
 extension ViewsCoordinator {
     
     func  presentActivityIndicator(message: String = "WORKING") {
-        let size : CGFloat = 180
-        let currentFrame = mainViewController.view.frame
-        activityView   = UIView(frame: CGRect(x: (currentFrame.size.width/2 - size/2),
-                                              y: (currentFrame.size.height/2 - size/2),
-                                              width: size, height: size))
-        activityView?.backgroundColor = .black
-        activityView?.layer.cornerRadius = 15
+        DispatchQueue.main.async {
+            let size : CGFloat = 180
+            let currentFrame = self.mainViewController.view.frame
+            self.activityView   = UIView(frame: CGRect(x: (currentFrame.size.width/2 - size/2),
+                                                  y: (currentFrame.size.height/2 - size/2),
+                                                  width: size, height: size))
+            self.activityView?.backgroundColor = .black
+            self.activityView?.layer.cornerRadius = 15
+            
+            self.spinnerMessage = UILabel(frame: CGRect(x: 10,
+                                                   y: 5,
+                                                   width: size - 20, height: 60))
+            self.spinnerMessage?.text      = message
+            self.spinnerMessage?.textColor = .white
+            self.spinnerMessage?.numberOfLines = 3
+            self.spinnerMessage?.textAlignment = .center
         
-        spinnerMessage = UILabel(frame: CGRect(x: 10,
-                                               y: 5,
-                                               width: size - 20, height: 60))
-        spinnerMessage?.text      = message
-        spinnerMessage?.textColor = .white
-        spinnerMessage?.numberOfLines = 3
-        spinnerMessage?.textAlignment = .center
-    
-        spinner.frame  = CGRect(x: (activityView?.frame.size.height)!/2 - 25,
-                                y: (activityView?.frame.size.width)!/2,
-                                width: 50, height: 50)
-        
-        
-        activityView?.addSubview(spinnerMessage!)
-        activityView?.addSubview(spinner)
-        
-        spinner.startAnimating()
-        
-        mainViewController.view.addSubview(activityView!)
-        
+            self.spinner.frame  = CGRect(x: (self.activityView?.frame.size.height)!/2 - 25,
+                                    y: (self.activityView?.frame.size.width)!/2,
+                                    width: 50, height: 50)
+            
+            
+            self.activityView?.addSubview(self.spinnerMessage!)
+            self.activityView?.addSubview(self.spinner)
+            
+            self.spinner.startAnimating()
+            
+            self.mainViewController.view.addSubview(self.activityView!)
+        }
     }
     
     func updateActivityMessage(message: String){

@@ -44,6 +44,7 @@ protocol SimpleRequestManagerDelegate {
     func simpleRequestInProgress(type: ResponseFormatType, stage: RequestState)
     func simpleRequestResponseObtained(response: HTTPURLResponse)
     func simpleRequestDataObtained(type: ResponseFormatType, data: Data)
+    func simpleRequestDataNotFound(type: ResponseFormatType, message: String)
     
 }
 
@@ -117,6 +118,10 @@ final class RequestManager {
                             
                     }
                     print("REQUEST MANAGER: \(data?.description ?? "REQUEST MANAGER: NO DATA")")
+                    
+                } else {
+                    print("REQUEST MANAGER: RESPONSE ERROR")
+                    self.delegate?.simpleRequestDataNotFound(type: formatType, message: "RESPONSE ERROR")
                     
                 }
             }

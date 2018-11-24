@@ -47,8 +47,8 @@ extension DataManager {
     
     func getPullRequestDiff(owner: String, repo: String, number: String){
         /// Pull Request Diff
-        /// https://patch-diff.githubusercontent.com/raw/magicalpanda/MagicalRecord/pull/1119.diff
-        let diffURL = "https://patch-diff.githubusercontent.com/raw/\(owner)/\(repo)/pulls/\(number).diff"
+        /// https://patch-diff.githubusercontent.com/raw/magicalpanda/MagicalRecord/pull/1122.diff
+        let diffURL = "https://patch-diff.githubusercontent.com/raw/\(owner)/\(repo)/pull/\(number).diff"
         
         VIEWCOORDINATOR.presentActivityIndicator(message: "REQUESTING DIFF")
         REQUESTMANAGER.simpleRequestTo(to: diffURL, forResponseFormat: .raw)
@@ -77,6 +77,12 @@ extension DataManager : SimpleRequestManagerDelegate {
         case .raw:
             rawDataToString(data: data)
         }
+        
+    }
+    
+    func simpleRequestDataNotFound(type: ResponseFormatType, message: String){
+        VIEWCOORDINATOR.updateActivityMessage(message: message)
+        VIEWCOORDINATOR.removeActivityIndicator()
         
     }
     
@@ -115,10 +121,12 @@ extension DataManager {
         }
         
         print("Number of pull requests: \(pullRequests.count)")
-        print(pullRequests[0])
+        print(pullRequests.first!)
         print("\n")
         VIEWCOORDINATOR.removeActivityIndicator()
         
+        // Get First Diff
+        getPullRequestDiff(owner: "magicalpanda", repo: "MagicalRecord", number: String(pullRequests.first!.pullRequestNumber))
     }
     
     /// RAW
@@ -129,7 +137,9 @@ extension DataManager {
         let rawData = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
         print("\(rawData!)\n\n")
         
-//        let diff = data
+        let diff = PullRequestDiff(content: rawData! as String)
+        pullRequestDiff = diff
+        
         VIEWCOORDINATOR.removeActivityIndicator()
     }
     

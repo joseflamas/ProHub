@@ -10,6 +10,12 @@ import Foundation
 
 struct PullRequestDiff {
     
+    var rawContent : String!
+    
+    init(content: String) {
+        rawContent = content
+        
+    }
     
 }
 
