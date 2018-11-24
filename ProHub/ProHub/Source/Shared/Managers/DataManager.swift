@@ -8,6 +8,20 @@
 
 import Foundation
 
+
+// Lists
+protocol DataManagerPRListDataDelegate {
+    func PRListInformationObtained(list: [PullRequest] )
+
+}
+
+// Detail
+protocol DataManagerPRDiffInformationDelegate {
+    func PRDiffObtained(diff: PullRequestDiff)
+    
+}
+
+
 /// Data Manager
 /// - comment:   Centralized place to handle persistent an ephimeral data
 ///              Initialized by the Application Manager
@@ -15,6 +29,9 @@ final class DataManager {
     
     private(set) var pullRequests    : [PullRequest] = [PullRequest]()
     private(set) var pullRequestDiff : PullRequestDiff?
+    
+    var listsDelegate : DataManagerPRListDataDelegate?
+    var diffDelegate  : DataManagerPRDiffInformationDelegate?
     
     /// Initializers
     init(){
@@ -66,10 +83,10 @@ extension DataManager : SimpleRequestManagerDelegate {
     }
     
     func simpleRequestResponseObtained(response: HTTPURLResponse) {
+        /// DEBUG HEADERS print("REQUEST MANAGER: \(response?.description ?? "REQUEST MANAGER: NO RESPONSE")")
     }
     
     func simpleRequestDataObtained(type: ResponseFormatType, data: Data) {
-        
         switch type {
         case .json:
             jsonDataToObject(data: data)
@@ -93,7 +110,7 @@ extension DataManager {
     
     /// To get Pull Requests from repo
     func jsonDataToObject(data: Data){
-        print("\n\nDATA MANAGER: Pull Requestes JSON Object\n\n")
+        print("\n\nDATA MANAGER: Pull Requests JSON Object\n\n")
         
         let jsonData = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
         // print("\(jsonData)\n\n")
@@ -118,6 +135,7 @@ extension DataManager {
                                                         labelBase:   base["label"]   as! String
                                                         )
             pullRequests.append(pullRequest)
+            
         }
         
         print("Number of pull requests: \(pullRequests.count)")
@@ -125,14 +143,17 @@ extension DataManager {
         print("\n")
         VIEWCOORDINATOR.removeActivityIndicator()
         
-        // Get First Diff
+//        // lists data delegate
+//        listsDelegate?.PRListInformationObtained(list: pullRequests)
+        
+//        //        // Get First Diff
         getPullRequestDiff(owner: "magicalpanda", repo: "MagicalRecord", number: String(pullRequests.first!.pullRequestNumber))
     }
     
     /// RAW
     /// To get Diff data
     func rawDataToString(data: Data){
-        print("\n\nDATA MANAGER: Compound Pull Diff\n\n")
+        print("\n\nDATA MANAGER: Compounded Pull Diff\n\n")
         
         let rawData = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
         print("\(rawData!)\n\n")
@@ -141,6 +162,10 @@ extension DataManager {
         pullRequestDiff = diff
         
         VIEWCOORDINATOR.removeActivityIndicator()
+        
+        // detail delegate
+        diffDelegate?.PRDiffObtained(diff: pullRequestDiff!)
+        
     }
     
 }

@@ -103,16 +103,12 @@ final class RequestManager {
         delegate?.simpleRequestInProgress(type: formatType, stage: .inProgress)
         let simpleTask = session?.dataTask(with: request!, completionHandler: { data, response, error -> Void in
             /// TO-DO: properly handle errors
-            print(error ?? "REQUEST MANAGER: NO ERROR")
-            if error != nil { return }
+            if error != nil { return }; print(error ?? "REQUEST MANAGER: NO ERROR")
             
-            /// DEBUG HEADERS print("REQUEST MANAGER: \(response?.description ?? "REQUEST MANAGER: NO RESPONSE")")
             if let httpResponse = response as? HTTPURLResponse {
                 self.delegate?.simpleRequestResponseObtained(response: httpResponse)
                 
                 if httpResponse.statusCode == 200 {
-                    print("REQUEST MANAGER: PROCESSING RESPONSE")
-                    
                     if data != nil {
                         self.delegate?.simpleRequestDataObtained(type: formatType, data: data!)
                             
@@ -129,7 +125,6 @@ final class RequestManager {
         })
         
         simpleTask?.resume()
-        
     }
     
     

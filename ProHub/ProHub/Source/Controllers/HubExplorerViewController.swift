@@ -17,6 +17,8 @@ import UIKit
 final class HubExplorerViewController : UIViewController {
     
     
+    @IBOutlet var navigatorController  : HubPRNavigatorViewController?
+    @IBOutlet var comparisonController : HubPRComparisonViewViewController?
     
     // Initializers
     // - comment: This implementation uses Nib files so no need to override view controller init
@@ -25,9 +27,42 @@ final class HubExplorerViewController : UIViewController {
     // Controller overrides
     override func viewDidLoad() {
         view.backgroundColor = .lightGray
+        loadViewComponents()
         DATAMANAGER.getInitialData()
-
+        
     }
     
     
+    private func loadViewComponents(){
+        DispatchQueue.main.async {
+            
+            self.comparisonController = HubPRComparisonViewViewController(nibName: "HubPRComparisonViewViewController",
+                                                                     bundle: .main)
+            self.comparisonController?.view.frame = self.view.frame
+            
+            self.navigatorController = HubPRNavigatorViewController(nibName: "HubPRNavigatorViewController",
+                                                               bundle: .main)
+            self.navigatorController?.view.frame = CGRect(x: 0, y: 0, width: 320, height: 320)
+            self.navigatorController?.view.backgroundColor = .clear
+            
+            
+            self.comparisonController?.willMove(toParent: self)
+            self.navigatorController?.willMove(toParent: self)
+            
+            self.addChild(self.comparisonController!)
+            self.addChild(self.navigatorController!)
+            self.view.addSubview(self.comparisonController!.view)
+            self.view.addSubview(self.navigatorController!.view)
+            
+            self.comparisonController?.didMove(toParent: self)
+            self.navigatorController?.didMove(toParent: self)
+            
+        }
+    }
+    
 }
+
+
+
+
+
