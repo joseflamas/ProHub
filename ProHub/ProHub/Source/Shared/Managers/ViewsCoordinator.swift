@@ -23,6 +23,10 @@ final class ViewsCoordinator {
     private(set) var mainNavigationController : UINavigationController!
     private(set) var currentMainView          : UIView!
     
+    // Activity Indicators
+    private      var activityView             : UIView?
+    private      var spinnerMessage           : UILabel?
+    private      var spinner                  : UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     
     // Initializers
     init(){
@@ -126,4 +130,54 @@ extension ViewsCoordinator {
     
 }
 
+
+extension ViewsCoordinator {
+    
+    func  presentActivityIndicator(message: String = "WORKING") {
+        let size : CGFloat = 180
+        let currentFrame = mainViewController.view.frame
+        activityView   = UIView(frame: CGRect(x: (currentFrame.size.width/2 - size/2),
+                                              y: (currentFrame.size.height/2 - size/2),
+                                              width: size, height: size))
+        activityView?.backgroundColor = .black
+        activityView?.layer.cornerRadius = 15
+        
+        spinnerMessage = UILabel(frame: CGRect(x: 10,
+                                               y: 5,
+                                               width: size - 20, height: 60))
+        spinnerMessage?.text      = message
+        spinnerMessage?.textColor = .white
+        spinnerMessage?.numberOfLines = 3
+        spinnerMessage?.textAlignment = .center
+    
+        spinner.frame  = CGRect(x: (activityView?.frame.size.height)!/2 - 25,
+                                y: (activityView?.frame.size.width)!/2,
+                                width: 50, height: 50)
+        
+        
+        activityView?.addSubview(spinnerMessage!)
+        activityView?.addSubview(spinner)
+        
+        spinner.startAnimating()
+        
+        mainViewController.view.addSubview(activityView!)
+        
+    }
+    
+    func updateActivityMessage(message: String){
+        DispatchQueue.main.async {
+            self.spinnerMessage?.text = message
+        }
+    }
+    
+    func removeActivityIndicator(){
+        DispatchQueue.main.async {
+            self.spinnerMessage?.text = "READY"
+            self.spinner.stopAnimating()
+            self.activityView?.removeFromSuperview()
+        }
+    
+    }
+    
+}
 

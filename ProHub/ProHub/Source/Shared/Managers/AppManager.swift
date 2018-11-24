@@ -38,8 +38,8 @@ final class AppManager {
     /// Initialize all the required components shared accross the application
     private func startApplicationComponents() {
         VIEWCOORDINATOR = ViewsCoordinator()
-        DATAMANAGER     = DataManager()
         REQUESTMANAGER  = RequestManager()
+        DATAMANAGER     = DataManager()
         
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 
 /// Pull Request States
-enum responseFormatType {
+enum ResponseFormatType {
     case json
     case raw
     
@@ -26,13 +26,24 @@ enum responseFormatType {
 /// Request States
 enum RequestState {
     case configuration
-    case open
+    case inProgress
     case completed
     
+    var string : String {
+        switch self {
+        case .configuration : return "configuration"
+        case .inProgress    : return "inProgress"
+        case .completed     : return "completed"
+        }
+    }
 }
 
+
+/// Simple Request Protocol
 protocol SimpleRequestManagerDelegate {
-    func requestInProgress(stage: RequestState)
+    func simpleRequestInProgress(type: ResponseFormatType, stage: RequestState)
+    func simpleRequestResponseObtained(response: HTTPURLResponse)
+    func simpleRequestDataObtained(type: ResponseFormatType, data: Data)
     
 }
 
@@ -45,7 +56,7 @@ final class RequestManager {
     private var session : URLSession?
     private var request : URLRequest?
     
-    var simpleRequestDelegate : SimpleRequestManagerDelegate?
+    var delegate : SimpleRequestManagerDelegate?
     
     /// Initializers
     init(){
@@ -81,38 +92,35 @@ final class RequestManager {
     
     /// Request Tasks
     /// Simple
-    func simpleRequestTo(to url: String, withResponseFormat formatType: responseFormatType = .json){
+    func simpleRequestTo(to url: String, forResponseFormat formatType: ResponseFormatType = .json){
+        delegate?.simpleRequestInProgress(type: formatType, stage: .configuration)
         
-        simpleRequestDelegate?.requestInProgress(stage: .configuration)
         session = configureDefaultSession()
         request = configureDefaultRequest(toURL: URL(string: url)!)
         
         print("REQUEST MANAGER: Requesting")
-        simpleRequestDelegate?.requestInProgress(stage: .open)
+        delegate?.simpleRequestInProgress(type: formatType, stage: .inProgress)
         let simpleTask = session?.dataTask(with: request!, completionHandler: { data, response, error -> Void in
+            /// TO-DO: properly handle errors
             print(error ?? "REQUEST MANAGER: NO ERROR")
-            if error != nil { return } /// TO-DO: properly handle errors
+            if error != nil { return }
             
             /// DEBUG HEADERS print("REQUEST MANAGER: \(response?.description ?? "REQUEST MANAGER: NO RESPONSE")")
             if let httpResponse = response as? HTTPURLResponse {
+                self.delegate?.simpleRequestResponseObtained(response: httpResponse)
+                
                 if httpResponse.statusCode == 200 {
                     print("REQUEST MANAGER: PROCESSING RESPONSE")
                     
                     if data != nil {
-                        switch formatType{
-                        case .json:
-                            DATAMANAGER.jsonDataToObject(data: data!)
-                        case .raw:
-                            DATAMANAGER.rawDataToString(data: data!)
-                        }
-                        
+                        self.delegate?.simpleRequestDataObtained(type: formatType, data: data!)
+                            
                     }
                     print("REQUEST MANAGER: \(data?.description ?? "REQUEST MANAGER: NO DATA")")
                     
                 }
             }
-            self.simpleRequestDelegate?.requestInProgress(stage: .completed)
-            
+            self.delegate?.simpleRequestInProgress(type: formatType, stage: .completed)
         })
         
         simpleTask?.resume()

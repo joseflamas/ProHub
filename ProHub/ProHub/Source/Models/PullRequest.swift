@@ -22,9 +22,7 @@ struct PullRequest {
     var headLabel         : String //  label = "magicalpanda:recommended_warnings";
     var baseLabel         : String //  label = "magicalpanda:master";
     
-    var diffURLS          : URL    //  "diff_url" = "https://github.com/magicalpanda/MagicalRecord/pull/1325.diff" ...
-    
-    init(pullId: Int, pullNumber: Int, pullTitle: String, pullState: String, idAuthor: Int, nameAuthor: String, association: String, labelHead: String, labelBase: String, URLdiff: URL ){
+    init(pullId: Int, pullNumber: Int, pullTitle: String, pullState: String, idAuthor: Int, nameAuthor: String, association: String, labelHead: String, labelBase: String ){
         
         pullRequestId     = pullId
         pullRequestNumber = pullNumber
@@ -37,8 +35,6 @@ struct PullRequest {
         
         headLabel = labelHead
         baseLabel = labelBase
-        
-        diffURLS   = URLdiff
         
     }
     
