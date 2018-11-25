@@ -43,7 +43,7 @@ final class HubExplorerViewController : UIViewController {
             
             self.navigatorController = HubPRNavigatorViewController(nibName: "HubPRNavigatorViewController",
                                                                bundle: .main)
-            self.navigatorController?.view.frame = CGRect(x: 0, y: (self.view.frame.height/2 - 160),
+            self.navigatorController?.view.frame = CGRect(x: 0, y: (self.view.frame.height - 330),
                                                           width: 320, height: 320)
             self.navigatorController?.view.backgroundColor = .clear
             

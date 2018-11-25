@@ -21,13 +21,14 @@
 		BB41595221A5E33600582104 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB41595121A5E33600582104 /* Extensions.swift */; };
 		BB41595421A5F74F00582104 /* HubExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB41595321A5F74F00582104 /* HubExplorerViewController.swift */; };
 		BB41595621A5F76100582104 /* HubExplorerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB41595521A5F76100582104 /* HubExplorerViewController.xib */; };
+		BB52745F21AA773000AFD254 /* HubPRComparisonViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB52745E21AA773000AFD254 /* HubPRComparisonViewTableViewCell.xib */; };
+		BB52746121AA7D4600AFD254 /* HubPRComparisonViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB52746021AA7D4600AFD254 /* HubPRComparisonViewTableViewCell.swift */; };
 		BB8EB02B21A9B6B500B7DD2E /* HubPRNavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8EB02A21A9B6B500B7DD2E /* HubPRNavigatorView.swift */; };
 		BB8EB02D21A9B8BE00B7DD2E /* HubPRComparisonViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB8EB02C21A9B8BE00B7DD2E /* HubPRComparisonViewViewController.xib */; };
 		BB8EB03321A9F2E200B7DD2E /* HubPRComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8EB03221A9F2E200B7DD2E /* HubPRComparisonView.swift */; };
 		BB8EB03521A9F36600B7DD2E /* HubPRNavigatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB8EB03421A9F36600B7DD2E /* HubPRNavigatorViewController.xib */; };
 		BB8EB03721A9FC0000B7DD2E /* HubPRNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8EB03621A9FC0000B7DD2E /* HubPRNavigatorViewController.swift */; };
 		BB8EB03921A9FC1500B7DD2E /* HubPRComparisonViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8EB03821A9FC1500B7DD2E /* HubPRComparisonViewViewController.swift */; };
-		BB8EB03B21AA52F700B7DD2E /* HubDiffTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8EB03A21AA52F700B7DD2E /* HubDiffTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,13 +48,14 @@
 		BB41595121A5E33600582104 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BB41595321A5F74F00582104 /* HubExplorerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubExplorerViewController.swift; sourceTree = "<group>"; };
 		BB41595521A5F76100582104 /* HubExplorerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HubExplorerViewController.xib; sourceTree = "<group>"; };
+		BB52745E21AA773000AFD254 /* HubPRComparisonViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HubPRComparisonViewTableViewCell.xib; sourceTree = "<group>"; };
+		BB52746021AA7D4600AFD254 /* HubPRComparisonViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubPRComparisonViewTableViewCell.swift; sourceTree = "<group>"; };
 		BB8EB02A21A9B6B500B7DD2E /* HubPRNavigatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubPRNavigatorView.swift; sourceTree = "<group>"; };
 		BB8EB02C21A9B8BE00B7DD2E /* HubPRComparisonViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HubPRComparisonViewViewController.xib; sourceTree = "<group>"; };
 		BB8EB03221A9F2E200B7DD2E /* HubPRComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubPRComparisonView.swift; sourceTree = "<group>"; };
 		BB8EB03421A9F36600B7DD2E /* HubPRNavigatorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HubPRNavigatorViewController.xib; sourceTree = "<group>"; };
 		BB8EB03621A9FC0000B7DD2E /* HubPRNavigatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubPRNavigatorViewController.swift; sourceTree = "<group>"; };
 		BB8EB03821A9FC1500B7DD2E /* HubPRComparisonViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubPRComparisonViewViewController.swift; sourceTree = "<group>"; };
-		BB8EB03A21AA52F700B7DD2E /* HubDiffTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubDiffTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				BB41595521A5F76100582104 /* HubExplorerViewController.xib */,
 				BB8EB03421A9F36600B7DD2E /* HubPRNavigatorViewController.xib */,
 				BB8EB02C21A9B8BE00B7DD2E /* HubPRComparisonViewViewController.xib */,
+				BB52745E21AA773000AFD254 /* HubPRComparisonViewTableViewCell.xib */,
 				BB41593121A5D85400582104 /* LaunchScreen.storyboard */,
 			);
 			path = Interface;
@@ -168,7 +171,7 @@
 			children = (
 				BB8EB02A21A9B6B500B7DD2E /* HubPRNavigatorView.swift */,
 				BB8EB03221A9F2E200B7DD2E /* HubPRComparisonView.swift */,
-				BB8EB03A21AA52F700B7DD2E /* HubDiffTextView.swift */,
+				BB52746021AA7D4600AFD254 /* HubPRComparisonViewTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				BB8EB03521A9F36600B7DD2E /* HubPRNavigatorViewController.xib in Resources */,
 				BB41595621A5F76100582104 /* HubExplorerViewController.xib in Resources */,
 				BB41593021A5D85400582104 /* Assets.xcassets in Resources */,
+				BB52745F21AA773000AFD254 /* HubPRComparisonViewTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,10 +277,10 @@
 				BB41594721A5DF3C00582104 /* ViewsCoordinator.swift in Sources */,
 				BB41595221A5E33600582104 /* Extensions.swift in Sources */,
 				BB41594521A5DF2100582104 /* AppManager.swift in Sources */,
-				BB8EB03B21AA52F700B7DD2E /* HubDiffTextView.swift in Sources */,
 				BB41594D21A5DF7A00582104 /* Common.swift in Sources */,
 				BB8EB03721A9FC0000B7DD2E /* HubPRNavigatorViewController.swift in Sources */,
 				BB41594921A5DF4D00582104 /* RequestManager.swift in Sources */,
+				BB52746121AA7D4600AFD254 /* HubPRComparisonViewTableViewCell.swift in Sources */,
 				BB41595421A5F74F00582104 /* HubExplorerViewController.swift in Sources */,
 				BB13254E21A74F3700A8A17E /* PullRequest.swift in Sources */,
 				BB8EB03321A9F2E200B7DD2E /* HubPRComparisonView.swift in Sources */,
