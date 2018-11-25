@@ -78,6 +78,15 @@ extension HubPRComparisonViewViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "COMPARISON_CELL") as! HubPRComparisonViewTableViewCell
+        
+        if let key  = compoundedPRDiff?.comparisonChangeTitleIndex[indexPath.section] {
+            if let line = compoundedPRDiff?.comparisonLines[key] {
+                cell.baseLineLabel.text = String(line[indexPath.item][0])
+                cell.headLineLabel.text = String(line[indexPath.item][0])
+                
+            }
+        }
+       
         return cell
     }
     

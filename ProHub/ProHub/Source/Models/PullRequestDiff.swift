@@ -7,10 +7,47 @@
 //
 
 import Foundation
+import UIKit
+
+enum  LineType {
+    case none
+    case added
+    case removed
+
+}
+
+struct ComparisonLine {
+    var diffFilePath : Substring
+    
+    var baseLineType : LineType = .none
+    var baseIndex    : Substring
+    var baseLine     : Substring
+    var headIndex    : Substring
+    var headLine     : Substring
+    
+    var color: UIColor {
+        switch baseLineType {
+        case .none:
+            return .white
+        case .added:
+            return .green
+        case .removed:
+            return .red
+        }
+    }
+    
+    mutating func updateType(to type: LineType){
+        baseLineType = type
+    }
+}
+
+
 
 struct PullRequestDiff {
     
     var rawContent : String!
+    
+    var filePaths  : Substring!
     var lines      : [Substring]
     var headLines  : [Substring] = [Substring]()
     var baseLines  : [Substring] = [Substring]()
@@ -20,11 +57,19 @@ struct PullRequestDiff {
     
     init(content: String) {
         rawContent = content
+        
         lines      = rawContent.split(separator: "\n")
         splitContents()
+        
         print("HEAD lines \(headLines.count)")
         print("BASE lines \(baseLines.count)")
     }
+    
+    
+    func getFilePaths(){
+    }
+    
+    
     
     mutating func splitContents(){
         
@@ -64,18 +109,21 @@ struct PullRequestDiff {
             
             if currentChangeTitle != nil{
                 if comparisonLines.keys.contains(currentChangeTitle!) {
-                    comparisonLines[currentChangeTitle!]?.append([currentChangeTitle!])
+                    comparisonLines[currentChangeTitle!]?.append([line])
                     
                 } else {
-                    comparisonLines[currentChangeTitle!] = [[currentChangeTitle!]]
+                    comparisonLines[currentChangeTitle!] = [[line]]
                     
                 }
             }
             
-            
         }
-        
     }
+    
+    ///
+//    func lookForValue()
+    
+    
 }
 
 

@@ -101,6 +101,7 @@ final class RequestManager {
         
         print("REQUEST MANAGER: Requesting")
         delegate?.simpleRequestInProgress(type: formatType, stage: .inProgress)
+        
         let simpleTask = session?.dataTask(with: request!, completionHandler: { data, response, error -> Void in
             /// TO-DO: properly handle errors
             if error != nil { return }; print(error ?? "REQUEST MANAGER: NO ERROR")
@@ -121,6 +122,7 @@ final class RequestManager {
                     
                 }
             }
+            
             self.delegate?.simpleRequestInProgress(type: formatType, stage: .completed)
         })
         
