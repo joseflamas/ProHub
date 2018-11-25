@@ -47,11 +47,11 @@ extension DataManager {
     func getInitialData() {
         /// Pull Requests
         REQUESTMANAGER.delegate = self
-        getPullRequestFromRepository()
+        getPullRequestFromRepository(owner: DEFAULT_REPOSITORY_OWNER, repo: DEFAULT_REPOSITORY_NAME)
         
     }
     
-    func getPullRequestFromRepository(owner: String = "magicalpanda", repo: String = "MagicalRecord", state: String = "open" ){
+    func getPullRequestFromRepository(owner: String, repo: String, state: String = "open" ){
         pullRequests.removeAll()
         /// Pull Requests
         /// https://api.github.com/repos/magicalpanda/MagicalRecord/pulls
@@ -143,10 +143,10 @@ extension DataManager {
         print("\n")
         VIEWCOORDINATOR.removeActivityIndicator()
         
-//        // lists data delegate
-//        listsDelegate?.PRListInformationObtained(list: pullRequests)
+        // lists data delegate
+        listsDelegate?.PRListInformationObtained(list: pullRequests)
         
-//        //        // Get First Diff
+        // Get First Diff
         getPullRequestDiff(owner: "magicalpanda", repo: "MagicalRecord", number: String(pullRequests.first!.pullRequestNumber))
     }
     

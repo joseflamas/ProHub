@@ -20,6 +20,7 @@ final class HubExplorerViewController : UIViewController {
     @IBOutlet var navigatorController  : HubPRNavigatorViewController?
     @IBOutlet var comparisonController : HubPRComparisonViewViewController?
     
+    
     // Initializers
     // - comment: This implementation uses Nib files so no need to override view controller init
     //            unless there is a reason
@@ -42,7 +43,8 @@ final class HubExplorerViewController : UIViewController {
             
             self.navigatorController = HubPRNavigatorViewController(nibName: "HubPRNavigatorViewController",
                                                                bundle: .main)
-            self.navigatorController?.view.frame = CGRect(x: 0, y: 0, width: 320, height: 320)
+            self.navigatorController?.view.frame = CGRect(x: 0, y: (self.view.frame.height/2 - 160),
+                                                          width: 320, height: 320)
             self.navigatorController?.view.backgroundColor = .clear
             
             
