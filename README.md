@@ -3,6 +3,8 @@
 Repository Pull Request Diff Check App for iOS -- IPAD ONLY -- (at the time):
 The main purpose of the app is to view the source changes (aka “diffs”) associated with the PRs.
 
+First Sketch demo video ---> https://youtu.be/1aKOEmZLtFE
+
 My laptop specs:
 MacBook Pro (13-inch, Mid 2012) macOS Mojave Version 10.14 Beta (18A353d)
 
