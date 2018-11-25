@@ -64,7 +64,7 @@ extension HubPRComparisonViewViewController : DataManagerPRDiffInformationDelega
 extension HubPRComparisonViewViewController : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (compoundedPRDiff?.comparisonLines.keys.count) ?? 1
+        return (compoundedPRDiff?.comparisonChangeTitleIndex.count) ?? 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -73,16 +73,26 @@ extension HubPRComparisonViewViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let key = compoundedPRDiff?.comparisonChangeTitleIndex[section]
-        return compoundedPRDiff?.comparisonLines[key!]?.count ?? 1
+        return compoundedPRDiff?.comparisonDictionary[key!]?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "COMPARISON_CELL") as! HubPRComparisonViewTableViewCell
         
         if let key  = compoundedPRDiff?.comparisonChangeTitleIndex[indexPath.section] {
-            if let line = compoundedPRDiff?.comparisonLines[key] {
-                cell.baseLineLabel.text = String(line[indexPath.item][0])
-                cell.headLineLabel.text = String(line[indexPath.item][0])
+            if let lines = compoundedPRDiff?.comparisonDictionary[key] {
+                
+                let line = lines[indexPath.item]
+                
+                // BASE
+                cell.baseIndexLabel.text = line.baseIndex
+                cell.baseLineLabel.text  = line.baseLine
+                
+                // HEAD
+                cell.headIndexView.backgroundColor = line.color
+                cell.headIndexLabel.text           = line.headIndex
+                cell.headLineView.backgroundColor  = line.color
+                cell.headLineLabel.text            = line.headLine
                 
             }
         }
