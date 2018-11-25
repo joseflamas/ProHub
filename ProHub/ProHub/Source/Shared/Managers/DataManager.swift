@@ -149,7 +149,9 @@ extension DataManager {
             listsDelegate?.PRListInformationObtained(list: pullRequests)
             
             // Get First Diff
-            getPullRequestDiff(owner: "magicalpanda", repo: "MagicalRecord", number: String(pullRequests.first!.pullRequestNumber))
+            getPullRequestDiff(owner: DEFAULT_REPOSITORY_OWNER,
+                               repo: DEFAULT_REPOSITORY_NAME,
+                               number: String(pullRequests.first!.pullRequestNumber))
         
         } else {
             VIEWCOORDINATOR.removeActivityIndicator()

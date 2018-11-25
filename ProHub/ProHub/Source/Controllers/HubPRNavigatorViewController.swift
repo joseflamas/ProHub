@@ -52,9 +52,14 @@ extension HubPRNavigatorViewController {
     
     @IBAction
     func lookForRepository(_ sender: Any){
-        DATAMANAGER.getPullRequestFromRepository(owner: ownerInput.text ?? DEFAULT_REPOSITORY_OWNER,
-                                                 repo: nameInput.text ?? DEFAULT_REPOSITORY_NAME)
+        let owner = ownerInput.text ?? DEFAULT_REPOSITORY_OWNER
+        let name  = nameInput.text ?? DEFAULT_REPOSITORY_NAME
         
+        DATAMANAGER.getPullRequestFromRepository(owner: owner,repo: name)
+        
+        DEFAULT_REPOSITORY_OWNER = owner
+        DEFAULT_REPOSITORY_NAME  = name
+
     }
     
     @IBAction
@@ -107,7 +112,10 @@ extension HubPRNavigatorViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         VIEWCOORDINATOR.updateNavigationControllerTitle(to: prList[indexPath.item].pullRequestTitle.uppercased())
-        
+        // Get First Diff
+        DATAMANAGER.getPullRequestDiff(owner: DEFAULT_REPOSITORY_OWNER,
+                                       repo: DEFAULT_REPOSITORY_NAME,
+                                       number: String(prList[indexPath.item].pullRequestNumber))
     }
     
 }

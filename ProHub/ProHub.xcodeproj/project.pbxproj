@@ -27,6 +27,7 @@
 		BB8EB03521A9F36600B7DD2E /* HubPRNavigatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB8EB03421A9F36600B7DD2E /* HubPRNavigatorViewController.xib */; };
 		BB8EB03721A9FC0000B7DD2E /* HubPRNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8EB03621A9FC0000B7DD2E /* HubPRNavigatorViewController.swift */; };
 		BB8EB03921A9FC1500B7DD2E /* HubPRComparisonViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8EB03821A9FC1500B7DD2E /* HubPRComparisonViewViewController.swift */; };
+		BB8EB03B21AA52F700B7DD2E /* HubDiffTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8EB03A21AA52F700B7DD2E /* HubDiffTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		BB8EB03421A9F36600B7DD2E /* HubPRNavigatorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HubPRNavigatorViewController.xib; sourceTree = "<group>"; };
 		BB8EB03621A9FC0000B7DD2E /* HubPRNavigatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubPRNavigatorViewController.swift; sourceTree = "<group>"; };
 		BB8EB03821A9FC1500B7DD2E /* HubPRComparisonViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubPRComparisonViewViewController.swift; sourceTree = "<group>"; };
+		BB8EB03A21AA52F700B7DD2E /* HubDiffTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubDiffTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 			children = (
 				BB8EB02A21A9B6B500B7DD2E /* HubPRNavigatorView.swift */,
 				BB8EB03221A9F2E200B7DD2E /* HubPRComparisonView.swift */,
+				BB8EB03A21AA52F700B7DD2E /* HubDiffTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				BB41594721A5DF3C00582104 /* ViewsCoordinator.swift in Sources */,
 				BB41595221A5E33600582104 /* Extensions.swift in Sources */,
 				BB41594521A5DF2100582104 /* AppManager.swift in Sources */,
+				BB8EB03B21AA52F700B7DD2E /* HubDiffTextView.swift in Sources */,
 				BB41594D21A5DF7A00582104 /* Common.swift in Sources */,
 				BB8EB03721A9FC0000B7DD2E /* HubPRNavigatorViewController.swift in Sources */,
 				BB41594921A5DF4D00582104 /* RequestManager.swift in Sources */,

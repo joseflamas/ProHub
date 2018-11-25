@@ -34,5 +34,5 @@ var REQUESTMANAGER  :   RequestManager!
 
 /// TO-DO: Security Manager
 // - comment:   Centralized place to handle all sensitive information
-let DEFAULT_REPOSITORY_OWNER : String = "magicalpanda"
-let DEFAULT_REPOSITORY_NAME  : String = "MagicalRecord"
+var DEFAULT_REPOSITORY_OWNER : String = "magicalpanda"
+var DEFAULT_REPOSITORY_NAME  : String = "MagicalRecord"
