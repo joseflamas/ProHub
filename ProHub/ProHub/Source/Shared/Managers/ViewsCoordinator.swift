@@ -71,6 +71,10 @@ extension ViewsCoordinator {
         
     }
     
+    public func updateNavigationControllerTitle(to title: String){
+        mainViewController.title = title
+    }
+    
 }
 
 /// MARK: - UIViewController

@@ -20,9 +20,16 @@ final class HubPRComparisonViewViewController : UIViewController {
     // Controller overrides
     override func viewDidLoad() {
         view.backgroundColor = .lightGray
-        
+        // Dismiss keyboard
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
     }
     
+    // Dismiss keyboard
+    @objc
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
 }
 

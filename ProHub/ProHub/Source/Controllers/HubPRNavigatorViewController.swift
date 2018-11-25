@@ -17,7 +17,6 @@ final class HubPRNavigatorViewController : UIViewController {
     @IBOutlet weak var nameInput: UITextField!
     @IBOutlet weak var lookButton: UIButton!
     @IBOutlet weak var pullsTable: UITableView!
-    
     @IBOutlet weak var hideShowButton: UIButton!
     
     
@@ -41,9 +40,10 @@ final class HubPRNavigatorViewController : UIViewController {
          prList = DATAMANAGER.pullRequests
          DATAMANAGER.listsDelegate = self
         
-         pullsTable.delegate = self
+         pullsTable.delegate   = self
          pullsTable.dataSource = self
          pullsTable.reloadData()
+        
     }
     
 }
@@ -52,7 +52,6 @@ extension HubPRNavigatorViewController {
     
     @IBAction
     func lookForRepository(_ sender: Any){
-        print("Looking ... ")
         DATAMANAGER.getPullRequestFromRepository(owner: ownerInput.text ?? DEFAULT_REPOSITORY_OWNER,
                                                  repo: nameInput.text ?? DEFAULT_REPOSITORY_NAME)
         
@@ -60,7 +59,11 @@ extension HubPRNavigatorViewController {
     
     @IBAction
     func hideShowOptionsView(_ sender: Any){
-        print("hide/Show")
+        if hideShowButton.titleLabel?.text == "LESS"{
+            hideOptionView()
+        } else {
+            showOptionView()
+        }
         
     }
     
@@ -77,6 +80,11 @@ extension HubPRNavigatorViewController : DataManagerPRListDataDelegate {
 }
 
 extension HubPRNavigatorViewController : UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return prList.count
     }
@@ -95,8 +103,30 @@ extension HubPRNavigatorViewController : UITableViewDataSource {
     
 }
 
-extension HubPRNavigatorViewController : UITableViewDelegate{
+extension HubPRNavigatorViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        VIEWCOORDINATOR.updateNavigationControllerTitle(to: prList[indexPath.item].pullRequestTitle.uppercased())
+        
+    }
     
 }
 
 
+extension HubPRNavigatorViewController {
+    // Animations
+    func hideOptionView(){
+        UIView.animate(withDuration: 1, animations: {
+            self.view.frame.origin.x = self.view.frame.origin.x - 240
+            self.hideShowButton.setTitle("MORE", for: .normal)
+        }, completion: nil)
+    }
+    
+    func showOptionView(){
+        UIView.animate(withDuration: 1, animations: {
+            self.view.frame.origin.x = self.view.frame.origin.x + 240
+            self.hideShowButton.setTitle("LESS", for: .normal)
+        }, completion: nil)
+    }
+    
+}
