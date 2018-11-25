@@ -139,15 +139,23 @@ extension DataManager {
         }
         
         print("Number of pull requests: \(pullRequests.count)")
-        print(pullRequests.first!)
-        print("\n")
-        VIEWCOORDINATOR.removeActivityIndicator()
         
-        // lists data delegate
-        listsDelegate?.PRListInformationObtained(list: pullRequests)
+        if pullRequests.count > 0 {
+            print(pullRequests.first!)
+            print("\n")
+            VIEWCOORDINATOR.removeActivityIndicator()
+            
+            // lists data delegate
+            listsDelegate?.PRListInformationObtained(list: pullRequests)
+            
+            // Get First Diff
+            getPullRequestDiff(owner: "magicalpanda", repo: "MagicalRecord", number: String(pullRequests.first!.pullRequestNumber))
         
-        // Get First Diff
-        getPullRequestDiff(owner: "magicalpanda", repo: "MagicalRecord", number: String(pullRequests.first!.pullRequestNumber))
+        } else {
+            VIEWCOORDINATOR.removeActivityIndicator()
+            print("NO PULL REQUESTS FOUND \n")
+        }
+        
     }
     
     /// RAW
