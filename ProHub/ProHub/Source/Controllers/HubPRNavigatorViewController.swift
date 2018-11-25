@@ -124,14 +124,14 @@ extension HubPRNavigatorViewController : UITableViewDelegate {
 extension HubPRNavigatorViewController {
     // Animations
     func hideOptionView(){
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.view.frame.origin.x = self.view.frame.origin.x - 240
             self.hideShowButton.setTitle("MORE", for: .normal)
         }, completion: nil)
     }
     
     func showOptionView(){
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.view.frame.origin.x = self.view.frame.origin.x + 240
             self.hideShowButton.setTitle("LESS", for: .normal)
         }, completion: nil)

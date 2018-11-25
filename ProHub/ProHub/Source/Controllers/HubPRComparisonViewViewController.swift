@@ -53,20 +53,27 @@ final class HubPRComparisonViewViewController : UIViewController {
 
 extension HubPRComparisonViewViewController : DataManagerPRDiffInformationDelegate {
     func PRDiffObtained(diff: PullRequestDiff) {
-        compoundedPRDiff = diff
-        
+        DispatchQueue.main.async {
+            self.compoundedPRDiff = diff
+            self.comparisonTable.reloadData()
+        }
     }
 }
 
 
 extension HubPRComparisonViewViewController : UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return (compoundedPRDiff?.comparisonLines.keys.count) ?? 1
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "File"
+        return String((compoundedPRDiff?.comparisonChangeTitleIndex[section])?.uppercased() ?? "DIFF")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        let key = compoundedPRDiff?.comparisonChangeTitleIndex[section]
+        return compoundedPRDiff?.comparisonLines[key!]?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

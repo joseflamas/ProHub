@@ -13,9 +13,10 @@ struct PullRequestDiff {
     var rawContent : String!
     var lines      : [Substring]
     var headLines  : [Substring] = [Substring]()
-    var headDiffIndices : [Int]  = [Int]()
     var baseLines  : [Substring] = [Substring]()
-    var baseDiffIndices : [Int]  = [Int]()
+    
+    var comparisonLines            : [Substring:[[Substring]]] = [Substring:[[Substring]]]()
+    var comparisonChangeTitleIndex : [Substring] = [Substring]()
     
     init(content: String) {
         rawContent = content
@@ -26,32 +27,54 @@ struct PullRequestDiff {
     }
     
     mutating func splitContents(){
-        for (index, line) in lines.enumerated() {
+        
+        var currentChangeTitle : Substring?
+        
+        var currentBaseIndex   : Int?
+        var currentBaseLine    : Substring?
+        var currentHeadIndex   : Int?
+        var currentHeadLine    : Substring?
+        
+        for (_, line) in lines.enumerated() {
+            
             if let _ = line.range(of: "diff --git") {
-                let titles = line.split(separator: " ")
-                baseLines.append(titles[1])
-                headLines.append(titles[2])
+//                let titles = line.split(separator: " ")
+//                baseLines.append(titles[1])
+//                headLines.append(titles[2])
             }
-            if let _ = line.range(of: "---") {
-                baseLines.append(line)
+            else if let _ = line.range(of: "---") {
+//                baseLines.append(line)
             }
             else if let _ = line.range(of: "+++") {
-                headLines.append(line)
+//                headLines.append(line)
+            }
+            else if let _ = line.range(of: "@@"){
+                currentChangeTitle = line
+                comparisonChangeTitleIndex.append(currentChangeTitle!)
             }
             else if let _ = line.range(of: "-") {
-                baseDiffIndices.append(index)
                 baseLines.append(line)
             }
             else if let _ = line.range(of: "+") {
-                headDiffIndices.append(index)
                 headLines.append(line)
-                
             } else {
                 baseLines.append(line)
                 headLines.append(line)
             }
             
+            if currentChangeTitle != nil{
+                if comparisonLines.keys.contains(currentChangeTitle!) {
+                    comparisonLines[currentChangeTitle!]?.append([currentChangeTitle!])
+                    
+                } else {
+                    comparisonLines[currentChangeTitle!] = [[currentChangeTitle!]]
+                    
+                }
+            }
+            
+            
         }
+        
     }
 }
 
